@@ -1,9 +1,4 @@
-from my_package import hello
-
-
-def main() -> None:
-    print(hello())
-
+from my_package.__main__ import main
 
 if __name__ == "__main__":
     main()

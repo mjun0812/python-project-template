@@ -1,7 +1,9 @@
 # syntax=docker/dockerfile:1
 
-ARG BUILDER_IMAGE="ubuntu:24.04"
-ARG RUNNER_IMAGE="ubuntu:24.04"
+ARG BUILDER_IMAGE="ubuntu:26.04"
+ARG RUNNER_IMAGE="ubuntu:26.04"
+
+FROM ghcr.io/astral-sh/uv:0.12.10 AS uv
 
 FROM $BUILDER_IMAGE AS builder
 
@@ -22,7 +24,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     curl \
     ca-certificates
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+COPY --from=uv /uv /bin/uv
 WORKDIR /app
 
 # Sync dependencies
@@ -53,7 +55,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Copy Python
 COPY --from=builder /opt/python /opt/python
 COPY --from=builder /opt/venv /opt/venv
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+COPY --from=uv /uv /bin/uv
 
 RUN rm -f /etc/apt/apt.conf.d/docker-clean \
     && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
