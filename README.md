@@ -10,7 +10,7 @@ This repository is created by [mjun0812/python-copier-template](https://github.c
 
 ## Features
 
-- 🚀 **Modern Python**: Support for Python 3.10-3.13
+- 🚀 **Modern Python**: Support for Python 3.10-3.14
 - 📦 **uv Package Manager**: Fast and reliable package management with [uv](https://github.com/astral-sh/uv)
 - 🐳 **Docker Support**: Complete Docker development environment
 - 📦 **Devcontainer Support**: VS Code devcontainer for consistent development
@@ -18,9 +18,10 @@ This repository is created by [mjun0812/python-copier-template](https://github.c
   [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development,
   plus shared Claude Code / Codex hooks that format and lint Python files as the agent edits them
 - 📝 **Type Hints**: Full type annotation support with modern Python features
+- 🔎 **Type Checking**: Pre-configured [ty](https://docs.astral.sh/ty/) for static type checking
 - 🔍 **Code Quality**: Pre-configured Ruff for linting and formatting
 - 🧪 **Testing**: pytest setup with example tests
-- 🔧 **Pre-commit Hooks**: Automated code quality checks
+- 🔧 **Git Hooks**: Automated code quality checks on commit with [prek](https://github.com/j178/prek)
 - 🏗️ **CI Ready**: GitHub Actions workflows included
 
 ## Quick Start
