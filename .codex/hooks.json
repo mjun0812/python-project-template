@@ -1,0 +1,17 @@
+{
+  "description": "Format and lint Python files after the agent edits them.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.agents/hooks/format-python.sh\"",
+            "statusMessage": "Formatting Python"
+          }
+        ]
+      }
+    ]
+  }
+}

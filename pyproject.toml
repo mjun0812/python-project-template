@@ -4,8 +4,13 @@ version = "0.0.1"
 description = "Modern Python Project"
 readme = "README.md"
 authors = [{ name = "Junya Morioka", email = "mjun@mjunya.com" }]
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = []
+
+[project.scripts]
+"Python-Project-Template" = "my_package.__main__:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -15,36 +20,46 @@ build-backend = "hatchling.build"
 packages = ["src/my_package"]
 
 [dependency-groups]
-dev = ["pre-commit>=4.2.0", "pytest>=8.4.0", "ruff>=0.11.12"]
+dev = [
+    "prek>=0.5.2",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "pytest-xdist>=3.8.0",
+    "ruff>=0.16.6",
+    "ty>=0.0.78",
+]
 
 [tool.ruff]
 line-length = 100
 target-version = "py312"
 exclude = [".git", ".ruff_cache", ".venv", ".vscode"]
 
+[tool.ruff.format]
+docstring-code-format = true
+
 [tool.ruff.lint]
-preview = true
 select = [
-    "ANN", # type annotation
-    "B",   # flake8-bugbear
-    "D",   # pydocstyle
-    "E",   # pycodestyle errors
-    "F",   # pyflakes
-    "I",   # isort
-    "PTH", # use `pathlib.Path` instead of `os.path`
-    "RUF", # ruff specific rules
-    "SIM", # flake8-simplify
-    "UP",  # pyupgrade
-    "W",   # pycodestyle warnings
+    "ANN",  # type annotation
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "D",    # pydocstyle
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "FURB", # refurb
+    "I",    # isort
+    "PERF", # perflint
+    "PT",   # flake8-pytest-style
+    "PTH",  # use `pathlib.Path` instead of `os.path`
+    "RUF",  # ruff specific rules
+    "SIM",  # flake8-simplify
+    "TC",   # flake8-type-checking
+    "UP",   # pyupgrade
+    "W",    # pycodestyle warnings
 ]
 ignore = [
     "ANN401", # Checks that function arguments are annotated with a more specific type than Any.
-    "B007",   # Unused loop variable
-    "B008",   # Function call in default argument
     "B905",   # `zip()` without `strict=True`
-    "COM812", # Missing trailing comma
-    "COM819", # Trailing comma prohibited
-    "D1",     # Missing docstring in public module, class, function, or method
+    "D100",   # Missing docstring in public module
     "D203",   # One blank line required before class docstring (ignored because D211 is prioritized in pydocstyle convention 'google')
     "D205",   # 1 blank line required between summary line and description
     "D212",   # Multi-line docstring summary should start at the first line
@@ -52,13 +67,7 @@ ignore = [
     "D400",   # First line of docstring should end with a period
     "D415",   # First line of docstring should end with punctuation (period, question mark, or exclamation point)
     "E114",   # Indentation is not a multiple of four (comment)
-    "G004",   # Logging statement uses f-string
-    "ISC001", # Implicit string concatenation on a single line
-    "ISC002", # Implicit string concatenation on multiple lines
     "PTH123", # `open()` should be replaced by `Path.open()`
-    "Q000",   # Single quotes found when double quotes are preferred
-    "Q001",   # Single quotes found when double quotes are preferred for multi-line strings
-    "Q002",   # Single quotes found when double quotes are preferred for docstrings
     "RUF002", # Checks for ambiguous Unicode characters in docstrings.
     "RUF003", # Checks for ambiguous Unicode characters in comments.
     "SIM105", # try-except-pass blocks that can be replaced with the contextlib.suppress context manager.
@@ -75,3 +84,17 @@ unfixable = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.pytest]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config", "--numprocesses=auto"]
+xfail_strict = true
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+exclude_also = ['if __name__ == "__main__":']

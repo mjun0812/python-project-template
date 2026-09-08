@@ -288,3 +288,7 @@ tags
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,macos,visualstudiocode,vim,python,jupyternotebooks,venv,virtualenv
+
+### AI coding agents ###
+# Personal Claude Code overrides (machine-specific settings, never shared)
+.claude/settings.local.json

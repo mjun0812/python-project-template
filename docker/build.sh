@@ -1,14 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-cd $(dirname $0)
-cd ../
+set -euo pipefail
 
-BUILDER_IMAGE="ubuntu:24.04"
-RUNNER_IMAGE="ubuntu:24.04"
-IMAGE_NAME=$(basename $(pwd) | tr '[:upper:]' '[:lower:]')
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
 
-docker build \
-    --build-arg BUILDER_IMAGE=${BUILDER_IMAGE} \
-    --build-arg RUNNER_IMAGE=${RUNNER_IMAGE} \
-    -t "${IMAGE_NAME}:latest" \
-    -f docker/Dockerfile .
+BUILDER_IMAGE="ubuntu:26.04"
+RUNNER_IMAGE="ubuntu:26.04"
+IMAGE_NAME="$(basename -- "$PWD" | tr '[:upper:]' '[:lower:]')"
+
+exec docker build \
+	--build-arg "BUILDER_IMAGE=${BUILDER_IMAGE}" \
+	--build-arg "RUNNER_IMAGE=${RUNNER_IMAGE}" \
+	-t "${IMAGE_NAME}:latest" \
+	-f docker/Dockerfile .
