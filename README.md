@@ -14,8 +14,9 @@ This repository is created by [mjun0812/python-copier-template](https://github.c
 - 📦 **uv Package Manager**: Fast and reliable package management with [uv](https://github.com/astral-sh/uv)
 - 🐳 **Docker Support**: Complete Docker development environment
 - 📦 **Devcontainer Support**: VS Code devcontainer for consistent development
-- ✨ **AI Editor Support**: [Cursor rules](https://docs.cursor.com/context/rules) and
-  [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development
+- ✨ **AI Editor Support**: [AGENTS.md](https://agents.md) and
+  [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development,
+  plus shared Claude Code / Codex hooks that format and lint Python files as the agent edits them
 - 📝 **Type Hints**: Full type annotation support with modern Python features
 - 🔍 **Code Quality**: Pre-configured Ruff for linting and formatting
 - 🧪 **Testing**: pytest setup with example tests
@@ -52,9 +53,6 @@ uv run ruff check .
 uv run ruff check . --fix
 ```
 
-<<<<<<< before updating
-### Docker Development Setup
-=======
 ### AI Coding Agents
 
 Rules for agents live in `AGENTS.md` (`CLAUDE.md` imports it). A shared hook formats and lints every Python
@@ -72,7 +70,6 @@ Both tools require the project to be trusted before they apply its configuration
   hook without reporting an error.
 
 ### Docker Development
->>>>>>> after updating
 
 The template includes a complete Docker setup:
 
@@ -89,7 +86,12 @@ docker compose up
 ### VS Code Devcontainer
 
 Open the project in VS Code and use the "Reopen in Container" command for a fully configured development environment.
-<<<<<<< before updating
+Devcontainer automatically installs uv, Claude Code, and Codex. The latest Claude Code and Codex releases are
+installed with their official installers when the image is built, so rebuild the image to update them.
+
+The container mounts the host `${HOME}/.claude` and `${HOME}/.codex` directories at `/home/vscode/.claude` and
+`/home/vscode/.codex` for authentication. These bind mounts are read-write, so changes made in the container can
+affect the host configuration. The uv cache is kept in a named volume and reused across container rebuilds.
 
 ### Update Template
 
@@ -114,23 +116,8 @@ your-project/
 └── README.md                 # Project documentation
 ```
 
-## Q&A
-
-### Why don't you use a type checker?
-
-I'm waiting for stable release of [`ty`](https://github.com/astral-sh/ty).
-You can install and use your preferred type checker.
-
 ## Support
 
 - 📖 [Copier Documentation](https://copier.readthedocs.io/)
 - 🐍 [uv Documentation](https://docs.astral.sh/uv/)
 - 🔍 [Ruff Documentation](https://docs.astral.sh/ruff/)
-=======
-Devcontainer automatically installs uv, Claude Code, and Codex. The latest Claude Code and Codex releases are
-installed with their official installers when the image is built, so rebuild the image to update them.
-
-The container mounts the host `${HOME}/.claude` and `${HOME}/.codex` directories at `/home/vscode/.claude` and
-`/home/vscode/.codex` for authentication. These bind mounts are read-write, so changes made in the container can
-affect the host configuration. The uv cache is kept in a named volume and reused across container rebuilds.
->>>>>>> after updating
