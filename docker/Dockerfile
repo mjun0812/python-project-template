@@ -3,7 +3,7 @@
 ARG BUILDER_IMAGE="ubuntu:26.04"
 ARG RUNNER_IMAGE="ubuntu:26.04"
 
-FROM ghcr.io/astral-sh/uv:0.12.10 AS uv
+FROM ghcr.io/astral-sh/uv:0.12.11 AS uv
 
 FROM $BUILDER_IMAGE AS builder
 
