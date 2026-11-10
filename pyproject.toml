@@ -21,12 +21,12 @@ packages = ["src/my_package"]
 
 [dependency-groups]
 dev = [
-    "prek>=0.5.9",
+    "prek>=0.5.10",
     "pytest>=9.2.0",
     "pytest-cov>=7.1.0",
     "pytest-xdist>=3.8.0",
-    "ruff>=0.17.3",
-    "ty>=0.0.95",
+    "ruff>=0.17.4",
+    "ty>=0.0.99",
 ]
 
 [tool.ruff]
